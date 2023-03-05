@@ -20,6 +20,11 @@ export class PimpsController {
     return await this.sendLocalFile(`alpha_motd.txt`, res);
   }
 
+  @Get('/matchmaking_tips.txt')
+  async getTips(@Res({ passthrough: true }) res: Response) {
+    return await this.sendLocalFile(`matchmaking_tips.txt`, res);
+  }
+
   @Get('/network_configuration_062.bin')
   async getConfig(@Res({ passthrough: true }) res: Response) {
     return await this.sendLocalFile(`network_configuration_062.bin`, res);
@@ -44,6 +49,15 @@ export class PimpsController {
     @Res({ passthrough: true }) res: Response,
   ) {
     return await this.sendLocalFile(`${hopperId}/game_set_001.bin`, res);
+  }
+
+  @Get('/:hopperId/:gameVariant')
+  async getGameVariant(
+    @Param('hopperId') hopperId: string,
+    @Param('gameVariant') gameVariant: string,
+    @Res({ passthrough: true }) res: Response,
+  ) {
+    return await this.sendLocalFile(`${hopperId}/${gameVariant}`, res);
   }
 
   @Get('/dynamic_hopper_statistics.bin')
